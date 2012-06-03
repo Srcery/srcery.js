@@ -4,7 +4,7 @@ srcery.js is the JavaScript frontent to the SrceryCDN Platform.  SrceryCDN is a 
 
 ## Usage
 
-For all usage and documentation please see: <http://srcery.js.github.com>
+For all usage and documentation please see: <http://srcery.github.com/srcery.js>
 
 
 ## License
