@@ -32,7 +32,7 @@ primary_links:
 # Else if you are pushing to username.github.com, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://srcery.js.github.com
+production_url : http://srcery.github.com/srcery.js
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
