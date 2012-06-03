@@ -17,13 +17,6 @@ author :
   github : travist
   twitter : softwaregnome
 
-# The primary links for this site.
-primary_links:
-  - title: Demo
-    path: /demo.html
-  - title: About
-    path: /about.html
-
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt
 # Most places will/should use BASE_PATH to make the urls
@@ -61,7 +54,7 @@ JB :
   #   - Only the following values are falsy: ["", null, false]
   #   - When setting BASE_PATH it must be a valid url.
   #     This means always setting the protocol (http|https) or prefixing with "/"
-  BASE_PATH : false
+  BASE_PATH : http://srcery.github.com/srcery.js
 
   # By default, the asset_path is automatically defined relative to BASE_PATH plus the enabled theme.
   # ex: [BASE_PATH]/assets/themes/[THEME-NAME]
