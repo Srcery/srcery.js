@@ -18,11 +18,7 @@
     <!-- Include the srcery.js assets if needed -->
     {% if page.srcery %}
       {% include srcery/srcery %}
-      {% if page.srcery.debug %}
-        {{SRCERY_SCRIPTS_DEBUG}}
-      {% else %}
-        {{SRCERY_SCRIPTS}}
-      {% endif %}
+      {{SRCERY_SCRIPTS}}
       {{SRCERY_CSS}}
     {% endif %}
 
