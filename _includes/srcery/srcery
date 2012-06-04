@@ -1,7 +1,0 @@
-{% assign SRCERY_PATH = '/assets/srcery.js/' %}
-{% capture SRCERY_SCRIPTS %}
-<script type="text/javascript" src="{{SRCERY_PATH}}src/srcery.js"></script>
-{% endcapture %}
-{% capture SRCERY_CSS %}
-<link rel="stylesheet" href="{{SRCERY_PATH}}css/srcery.css">
-{% endcapture %}

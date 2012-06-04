@@ -17,9 +17,7 @@
 
     <!-- Include the srcery.js assets if needed -->
     {% if page.srcery %}
-      {% include srcery/srcery %}
-      {{SRCERY_SCRIPTS}}
-      {{SRCERY_CSS}}
+      {% include srcery/srcery_css %}
     {% endif %}
 
     <!-- Le fav and touch icons -->
@@ -53,6 +51,9 @@
       </div>
 
       <footer>
+        {% if page.srcery %}
+          <p>{% include srcery/srcery_js %}</p>
+        {% endif %}
         <p>&copy; {{ site.author.name }} 2012
           with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
           and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
