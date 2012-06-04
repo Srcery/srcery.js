@@ -22,9 +22,15 @@ srcery.onReady(function() {
           return false;
         }
       },
-      uploadStarted:function(i, file, len){
-        console.log(file);
-      },
+      uploadStarted:(function(image) {
+        return function(i, file, len){
+          var reader = new FileReader();
+          reader.onload = function(e){
+            $(image).attr('src',e.target.result);
+          };
+          reader.readAsDataURL(file);
+        };
+      })(this),
       progressUpdated: function(i, file, progress) {
         console.log('Uploading...' + progress);
       }
