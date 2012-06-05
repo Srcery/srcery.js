@@ -21,7 +21,7 @@ var srcery = {
 };
 
 // Dynamically load a javascript file.
-var loadJS = function(src, getObject, callback) {
+var srceryLoad = function(src, getObject, callback) {
   var object = getObject();
   if (typeof object == 'undefined') {
     var tag = document.createElement('script');
@@ -54,7 +54,7 @@ var src = prot;
 src += '://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js';
 
 // Load jQuery.
-loadJS(src, function() {
+srceryLoad(src, function() {
   return window['jQuery'];
 }, function($) {
 
@@ -69,17 +69,22 @@ loadJS(src, function() {
   });
 
   // Load srcery.image.js
-  loadJS(srcery.path + 'src/srcery.image.js', function() {
+  srceryLoad(srcery.path + 'src/srcery.image.js', function() {
     return srcery['image'];
   });
 
   // Load srcery.server.js
-  loadJS(srcery.path + 'src/srcery.server.js', function() {
+  srceryLoad(srcery.path + 'src/srcery.server.js', function() {
     return srcery['server'];
   });
 
+  // Load srcery.admin.js
+  srceryLoad(srcery.path + 'src/srcery.admin.js', function() {
+    return srcery['admin'];
+  });
+
   // Load jquery.filedrop.js.
-  loadJS(srcery.path + 'lib/jquery.filedrop.js/jquery.filedrop.js', function() {
+  srceryLoad(srcery.path + 'lib/jquery.filedrop.js/jquery.filedrop.js', function() {
     return jQuery.fn['filedrop'];
   }, function() {
     srcery.isReady();
