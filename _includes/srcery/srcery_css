@@ -1,1 +1,1 @@
-<link rel="stylesheet" href="/assets/srcery.js/css/srcery.css">
+<link rel="stylesheet" href="{{ BASE_PATH }}/assets/srcery.js/css/srcery.css">
