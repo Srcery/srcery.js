@@ -1,2 +1,6 @@
-<script type="text/javascript" src="{{ BASE_PATH }}/assets/srcery.js/src/srcery.js"></script>
+<script type="text/javascript" src="{{ BASE_PATH }}/assets/srcery.js/js/yepnope.js"></script>
+<script type="text/javascript">
+  var srcery = {path: '{{ BASE_PATH }}/assets/srcery.js/js'};
+  yepnope('{{ BASE_PATH }}/assets/srcery.js/js/srcery.js');
+</script>
 Powered by <a class="srcery-link" href="http://srcery.net">Srcery</a>
