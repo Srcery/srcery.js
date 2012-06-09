@@ -1,7 +1,7 @@
 srcery.image = function() {
 };
 
-srcery.onReady(function() {
+srcery.images = function() {
   jQuery('.srcery-img').each(function() {
     var src = jQuery(this).attr('src');
     jQuery(this).filedrop({
@@ -36,4 +36,4 @@ srcery.onReady(function() {
       }
     });
   });
-});
+};
