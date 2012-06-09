@@ -5,7 +5,7 @@ srcery.images = function() {
   jQuery('.srcery-img').each(function() {
     var src = jQuery(this).attr('src');
     jQuery(this).filedrop({
-      paramname:'pic',
+      paramname:'img',
       maxfiles: 5,
       maxfilesize: 2,
       url: src,
