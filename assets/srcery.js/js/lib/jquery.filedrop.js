@@ -32,6 +32,7 @@
       url: '',
       refresh: 1000,
       paramname: 'userfile',
+      allowedfiletypes:[],
       maxfiles: 25,           // Ignored if queuefiles is set > 0
       maxfilesize: 1,         // MB file size limit
       queuefiles: 0,          // Max files before queueing (for large volume uploads)
@@ -39,6 +40,7 @@
       data: {},
       headers: {},
       drop: empty,
+      dragStart: empty,
       dragEnter: empty,
       dragOver: empty,
       dragLeave: empty,
@@ -56,16 +58,15 @@
       progressUpdated: empty,
       speedUpdated: empty
       },
-      errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge"],
+      errors = ["BrowserNotSupported", "TooManyFiles", "FileTooLarge", "FileTypeNotAllowed"],
       doc_leave_timer, stop_loop = false,
       files_count = 0,
       files;
 
   $.fn.filedrop = function(options) {
     var opts = $.extend({}, default_opts, options);
-
-    this.bind('drop', drop).bind('dragenter', dragEnter).bind('dragover', dragOver).bind('dragleave', dragLeave);
-    $(document).bind('drop', docDrop).bind('dragenter', docEnter).bind('dragover', docOver).bind('dragleave', docLeave);
+    this.on('drop', drop).on('dragstart', opts.dragStart).on('dragenter', dragEnter).on('dragover', dragOver).on('dragleave', dragLeave);
+    $(document).on('drop', docDrop).on('dragenter', docEnter).on('dragover', docOver).on('dragleave', docLeave);
 
     $('#' + opts.fallback_id).change(function(e) {
       opts.drop(e);
@@ -73,11 +74,11 @@
       files_count = files.length;
       upload();
     });
-    
+
     function drop(e) {
-        opts.drop(e);
+        opts.drop.call(this, e);
         files = e.dataTransfer.files;
-        if (files === null || files === undefined) {
+        if (files === null || files === undefined || files.length === 0) {
           opts.error(errors[0]);
           return false;
         }
@@ -97,8 +98,8 @@
 
           $.each(params, function() {
             var pair = this.split(/=/, 2);
-            var name = decodeURI(pair[0]);
-            var val = decodeURI(pair[1]);
+            var name = decodeURIComponent(pair[0]);
+            var val = decodeURIComponent(pair[1]);
 
             builder += dashdash;
             builder += boundary;
@@ -161,6 +162,14 @@
         if (!files) {
           opts.error(errors[0]);
           return false;
+        }
+        if(opts.allowedfiletypes.push && opts.allowedfiletypes.length){
+          for(var fileIndex = files.length;fileIndex--;){
+            if(!files[fileIndex].type || $.inArray(files[fileIndex].type, opts.allowedfiletypes) < 0){
+              opts.error(errors[3]);
+              return false;
+            }
+          }
         }
 
         var filesDone = 0,
@@ -315,6 +324,12 @@
               }
               if (result === false) stop_loop = true;
             }
+            
+            //Pass any errors to the error option
+            if(xhr.status != 200){
+              opts.error(xhr.statusText);
+            }
+            
           };
 
         }
@@ -349,47 +364,50 @@
       function dragEnter(e) {
         clearTimeout(doc_leave_timer);
         e.preventDefault();
-        opts.dragEnter(e);
+        opts.dragEnter.call(this, e);
       }
 
       function dragOver(e) {
         clearTimeout(doc_leave_timer);
         e.preventDefault();
-        opts.docOver(e);
-        opts.dragOver(e);
+        opts.docOver.call(this, e);
+        opts.dragOver.call(this, e);
       }
 
       function dragLeave(e) {
         clearTimeout(doc_leave_timer);
-        opts.dragLeave(e);
+        opts.dragLeave.call(this, e);
         e.stopPropagation();
       }
 
       function docDrop(e) {
         e.preventDefault();
-        opts.docLeave(e);
+        opts.docLeave.call(this, e);
         return false;
       }
 
       function docEnter(e) {
         clearTimeout(doc_leave_timer);
         e.preventDefault();
-        opts.docEnter(e);
+        opts.docEnter.call(this, e);
         return false;
       }
 
       function docOver(e) {
         clearTimeout(doc_leave_timer);
         e.preventDefault();
-        opts.docOver(e);
+        opts.docOver.call(this, e);
         return false;
       }
 
       function docLeave(e) {
-        doc_leave_timer = setTimeout(function() {
-          opts.docLeave(e);
-        }, 200);
+        doc_leave_timer = setTimeout((function(_this) {
+          return function() {
+            opts.docLeave.call(_this, e);
+          };
+        })(this), 200);
       }
+    return this;
   };
   function empty() {}
 
