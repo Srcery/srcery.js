@@ -1,0 +1,39 @@
+.srcery-drop {
+  position: relative;
+  border: none;
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  float: left;
+  background: #333;
+  background-image: '';
+  border: none;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  box-shadow: 4px 4px 6px #333;
+  -webkit-box-shadow: 4px 4px 6px #333;
+  -moz-box-shadow: 4px 4px 6px #333;
+}
+
+.srcery-drop-placeholder {
+  width:100%;
+  height:100%;
+  position:absolute;
+}
+
+.srcery-drop-text {
+  color: #eee;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  margin: -5px 0 0 -50px;
+  text-align: center;
+  vertical-align: center;
+}
+
+.srcery-img {
+  width: 120px;
+  height: 120px;
+}
